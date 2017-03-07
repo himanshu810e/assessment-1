@@ -1,0 +1,73 @@
+<h1>
+  {{title}}
+</h1>
+
+<h2 *ngIf="showCatalog">
+  Products
+
+</h2>
+
+<table *ngIf="showCatalog">
+  <thead>
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Quantity</td>
+    <td>Price</td>
+    <td>Offer</td>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products ">
+    <td>{{product.item.id}}</td>
+    <td>{{product.item.name}}</td>
+    <td><button (click)="decreaseQuantity(product)">-</button>{{product.quantity}}
+      <button (click)="increaseQuantity(product)">+</button></td>
+    <td>{{product.item.price}}</td>
+
+    <td>
+      <span *ngIf="offers[product.item.id]">{{offers[product.item.id].title}}</span>
+    </td>
+
+  </tr>
+
+  </tbody>
+<button (click)="submitOrder()" >Submit order</button>
+</table>
+
+
+
+<h2 *ngIf="orderObject">Orders</h2>
+<h2 *ngIf="orderObject">{{orderObject.name}}</h2>
+<h3 *ngIf="orderObject">{{orderObject.address}}</h3>
+
+<table *ngIf="orderObject">
+  <thead>
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Quantity</td>
+    <td>Price</td>
+    <td>Total Price</td>
+    <td>Offer</td>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of orderObject.items ">
+    <td>{{product.item.id}}</td>
+    <td>{{product.item.name}}</td>
+    <td>{{product.quantity}}
+    <td>{{product.item.price}}</td>
+    <td>{{product.totalprice}}</td>
+
+    <td>
+      <span *ngIf="offers[product.item.id]">{{offers[product.item.id].title}}</span>
+    </td>
+
+  </tr>
+<tr><td>Grand Total : </td><td>{{orderObject.total}}</td></tr>
+  </tbody>
+  <button (click)="reload()" >Shop More</button>
+</table>
